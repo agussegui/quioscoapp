@@ -352,7 +352,73 @@ const productos = [
         precio: 69.9,
         imagen: "pizzas_11",
         categoriaId: 3
-      }
+      },
+      // {
+      //   nombre: "Batidos ",
+      //   precio: 69.9,
+      //   imagen: "pizzas_11",
+      //   categoriaId: 6
+      // },
+      // {
+      //   nombre: "Batidos ",
+      //   precio: 69.9,
+      //   imagen: "pizzas_11",
+      //   categoriaId: 6
+      // },
+      // {
+      //   nombre: "Batidos ",
+      //   precio: 69.9,
+      //   imagen: "pizzas_11",
+      //   categoriaId: 6
+      // },
+      // {
+      //   nombre: "Batidos ",
+      //   precio: 69.9,
+      //   imagen: "pizzas_11",
+      //   categoriaId: 6
+      // },
+      // {
+      //   nombre: "Batidos ",
+      //   precio: 69.9,
+      //   imagen: "pizzas_11",
+      //   categoriaId: 6
+      // },
+      // {
+      //   nombre: "Batidos ",
+      //   precio: 69.9,
+      //   imagen: "pizzas_11",
+      //   categoriaId: 6
+      // },
+      // {
+      //   nombre: "Batidos ",
+      //   precio: 69.9,
+      //   imagen: "pizzas_11",
+      //   categoriaId: 6
+      // },
+      // {
+      //   nombre: "Batidos ",
+      //   precio: 69.9,
+      //   imagen: "pizzas_11",
+      //   categoriaId: 6
+      // },
+      // {
+      //   nombre: "Batidos ",
+      //   precio: 69.9,
+      //   imagen: "pizzas_11",
+      //   categoriaId: 6
+      // },
+      // {
+      //   nombre: "Batidos ",
+      //   precio: 69.9,
+      //   imagen: "pizzas_11",
+      //   categoriaId: 6
+      // },
+      // {
+      //   nombre: "Batidos ",
+      //   precio: 69.9,
+      //   imagen: "pizzas_11",
+      //   categoriaId: 6
+      // }
 ]
 
 export {

@@ -1,12 +1,23 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import Image from 'next/image'
 import useQuiosco from '../hooks/useQuiosco'
 import { formatearDinero } from '../helpers'
 
 const ModalProducto = () => {
 
-    const {producto, handleChangeModal} = useQuiosco()
+    const {producto, handleChangeModal, handleAgregarPedido, pedido} = useQuiosco()
     const [cantidad, setCantidad] = useState(1);    
+    const [edicion, setEdicion] = useState(false);
+
+    useEffect(() => {
+        //comprobar si el modal actual esta en el pedido
+        if(pedido.some((pedidoState) => pedidoState.id === producto.id)){
+            
+            const productoEdicion = pedido.find((pedidoState) => pedidoState.id === producto.id)    
+            setEdicion(true)
+            setCantidad(productoEdicion.cantidad)
+        }
+    }, [producto, pedido ])
 
   return (
     <div className='md:flex gap-10'>
@@ -43,8 +54,14 @@ const ModalProducto = () => {
             </div>
             <h1 className='text-3xl font-bold pt-5'>{producto.nombre}</h1>
             <p className='mt-5 font-black text-5xl text-amber-500'>{formatearDinero(producto.precio)}</p>
-            <div className='pt-5 flex justify-between'>
-                <button>
+            <div className='pt-5 flex gap-4'>
+                <button
+                    type='button'
+                    onClick={() => {
+                        if(cantidad <= 1) return;
+                        setCantidad(cantidad - 1)
+                    }}
+                >
                     <svg 
                         xmlns="http://www.w3.org/2000/svg" 
                         fill="none" 
@@ -60,8 +77,14 @@ const ModalProducto = () => {
                         />
                     </svg>
                 </button>
-                <p>{cantidad }</p>
-                <button>
+                <p className='text-3xl' >{cantidad}</p>
+                <button
+                    type='button'
+                    onClick={() => {
+                        if(cantidad >= 6) return;
+                        setCantidad(cantidad + 1)
+                    }}
+                >
                     <svg 
                         xmlns="http://www.w3.org/2000/svg" 
                         fill="none" 
@@ -78,6 +101,13 @@ const ModalProducto = () => {
                     </svg>
                 </button>
             </div>
+            <button
+                type='button'
+                className='bg-amber-500 hover:bg-amber-800 px-5 py-2 mt-5 text-white uppercase font-bold rounded-md transition-all'
+                onClick={() => handleAgregarPedido({...producto, cantidad}) }
+            >
+                {edicion ? 'Guardar Cambios' : 'Añadir al Pedido'}
+            </button>
         </div>
     </div>
   )
