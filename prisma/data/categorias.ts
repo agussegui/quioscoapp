@@ -1,5 +1,5 @@
 const categorias = [
-    {
+      {
         icono: "cafe",
         nombre: "Café"
       },
@@ -22,6 +22,10 @@ const categorias = [
       {
         icono: "galletas",
         nombre: "Galletas"
+      },
+      {
+        icono: "gaseosas",
+        nombre: "Gaseosas"
       }
 ]
 

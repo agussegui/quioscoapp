@@ -31,7 +31,7 @@ const Pasos = () => {
                         router.push(paso.url)
                     }}
                     key={paso.paso}
-                    className="text-2xl font-bold"
+                    className=" sm:text-3xl text-xl font-bold"
                 >
                     {paso.nombre}
                 </button>
