@@ -1,19 +1,20 @@
-import { useEffect } from 'react'; 
+import { useEffect, useCallback } from 'react'; 
 import Layout from '../layout/Layout';
 import useQuiosco from '../hooks/useQuiosco';
-
+import {formatearDinero} from '../helpers'
 
 export default function Total() {
 
-    const comprobarPedido = () => {
-        return  
-    }
+    const {pedido, nombre, setNombre, colocarOrden, total} = useQuiosco()
 
+    //Esta funcion se ejecuta cuando el pedido cambie
+    const comprobarPedido = useCallback(() => {
+        return  pedido.length === 0 || nombre === '' || nombre.length < 3
+    }, [pedido, nombre]);
 
-    const colocarOrden = e => {
-        e.preventDefault();
-        console.log('enviandooo')
-    }
+    useEffect(() => {
+        comprobarPedido()
+    }, [pedido, comprobarPedido])
 
     return(
         <Layout pagina='Total y Confirmar Pedido'>
@@ -33,18 +34,21 @@ export default function Total() {
                         id='nombre'
                         type='text'
                         className='bg-gray-200 w-full lg:w-1/3 mt-3 p-2 rounded-md'
+                        value={nombre}
+                        onChange={(e) => setNombre(e.target.value)}
                     />
                 </div>
 
                 <div className='mt-10'>
-                    <p className='max-sm:text-2xl text-4xl font-bold'>Total a Pagar: {''} <span className=' text-amber-500 font-bold max-sm:text-xl text-3xl shadow-xl bg-gray-200 rounded-md p-3'>$12500</span></p>
+                    <p className='max-sm:text-2xl text-4xl font-bold'>Total a Pagar: {''} <span className=' text-amber-500 font-bold max-sm:text-xl text-3xl shadow-xl bg-gray-200 rounded-md p-3'>{formatearDinero(total)}</span></p>
                 </div>
 
                 <div className='mt-8'>
                     <input 
                         type='submit'
-                        className='w-full lg:w-auto px-5 py-2 rounded-md uppercase font-bold text-white bg-gray-800 text-center'
+                        className={`${comprobarPedido() ? 'bg-gray-200' : 'bg-gray-700 hover:bg-gray-900'} w-full lg:w-auto px-5 py-2 rounded-md uppercase font-bold text-white  text-center`}
                         value="Confirmar Pedido"
+                        disabled={comprobarPedido()}
                     >
                     </input>
                 </div>

@@ -13,6 +13,8 @@ const QuioscoProvider = ({children})  =>{
     const [producto, setProducto] = useState({})
     const [modal, setModal] = useState(false)
     const [pedido, setPedido] = useState([])
+    const [nombre, setNombre] = useState('')
+    const [total, setTotal] = useState(0)
 
     const router = useRouter()   
 
@@ -28,6 +30,12 @@ const QuioscoProvider = ({children})  =>{
     useEffect(()=>{
         setCategoriaActual(categorias[0])
     }, [categorias])
+
+    useEffect(() => {
+        const nuevoTotal = pedido.reduce((total, producto) => (producto.precio * producto.cantidad) + total, 0)
+
+        setTotal(nuevoTotal)
+    },[pedido] )
 
     const handleClickCategoria = id => {
         const categoria = categorias.filter( cat => cat.id === id )
@@ -52,6 +60,16 @@ const QuioscoProvider = ({children})  =>{
     const handleEliminarProducto = id => {
         const pedidoActualizado = pedido.filter(producto => producto.id !== id)
         setPedido(pedidoActualizado)
+    }
+
+    const colocarOrden = async (e) => {
+        e.preventDefault();
+        try {
+            const {data} = await axios.post('/api/ordenes', {pedido, nombre, total, fecha: Date.now().toString() })
+            console.log(data)
+        } catch(error) {
+            console.log(error)
+        }
     }
 
     const handleAgregarPedido = ({categoriaId, ...producto}) => {
@@ -102,7 +120,12 @@ const QuioscoProvider = ({children})  =>{
                 handleAgregarPedido,
                 pedido,
                 handleEditarCantidades,
-                handleEliminarProducto
+                handleEliminarProducto,
+                nombre, 
+                setNombre,
+                colocarOrden,
+                setTotal, 
+                total
                 
 
             }}
