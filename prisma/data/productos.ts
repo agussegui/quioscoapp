@@ -132,9 +132,9 @@ const productos = [
 		categoriaId : 4
 	},
 	{
-		nombrex : "Paquete de 3 donas con Vainilla y Chocolate ",
-		preciox : 950,
-		imagenx : "donas_09",
+		nombre : "Paquete de 3 donas con Vainilla y Chocolate ",
+		precio : 950,
+		imagen : "donas_09",
 		categoriaId : 4
 	},
 	{
